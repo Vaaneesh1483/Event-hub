@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Hub - Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <h1>Event Hub</h1>
+      <nav>
+        <ul>
+          <li><a href="#" class="active" id="create-tab">Create Event</a></li>
+          <li><a href="#" id="browse-tab">Browse Events</a></li>
+          <li><button id="dark-toggle" class="btn btn-small">Toggle Dark Mode</button>
+          </li>
+        </ul>
+      </nav>
+      <div class="user-menu">
+        <span id="current-user">Welcome, User</span>
+        <button id="logout-btn" class="btn btn-small">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="create-event-section">
+      <h2>Create New Event</h2>
+      <form id="event-form">
+        <div class="form-group">
+          <label for="event-title">Event Title</label>
+          <input type="text" id="event-title" required>
+        </div>
+        <div class="form-group">
+          <label for="event-description">Description</label>
+          <textarea id="event-description" rows="3" required></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="event-date">Date</label>
+            <input type="date" id="event-date" required>
+          </div>
+          <div class="form-group">
+            <label for="event-time">Time</label>
+            <input type="time" id="event-time" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event-organizer">Organizer</label>
+          <input type="text" id="event-organizer" required>
+        </div>
+        <div class="form-group">
+          <label for="event-location">Location</label>
+          <input type="text" id="event-location" required placeholder="Enter address or place name">
+        </div>
+        <div id="location-map" class="map-container"></div>
+        <div class="form-group hidden" id="coordinates-group">
+          <input type="hidden" id="event-latitude">
+          <input type="hidden" id="event-longitude">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Event</button>
+      </form>
+    </section>
+
+    <section id="browse-events-section" class="hidden">
+      <h2>Upcoming Events</h2>
+      <div class="filter-bar">
+        <input type="text" id="search-events" placeholder="Search events...">
+        <select id="filter-events">
+          <option value="all">All Events</option>
+          <option value="today">Today</option>
+          <option value="week">This Week</option>
+          <option value="month">This Month</option>
+        </select>
+      </div>
+      <div id="events-list" class="events-grid">
+        <!-- Events will be populated here -->
+      </div>
+    </section>
+  </main>
+
+  <div id="event-details-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modal-event-title"></h2>
+      <p id="modal-event-description"></p>
+      <div class="event-meta">
+        <p><strong>Date & Time:</strong> <span id="modal-event-datetime"></span></p>
+        <p><strong>Organizer:</strong> <span id="modal-event-organizer"></span></p>
+        <p><strong>Location:</strong> <span id="modal-event-location"></span></p>
+      </div>
+      <div id="modal-event-map" class="map-container"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
